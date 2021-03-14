@@ -1,0 +1,640 @@
+/*
+1. Posicionamiento (position...)
+2. Modelo de caja (box model) (margin, padding...)
+3. Tipografia
+4. Visuales (un shadow-box, border radius....)
+5. Otros
+
+esto es una guia a la hora de generar estilos. empezamos
+por el 1
+*/
+:root {
+    /* Colores */ 
+    --bitcoin-orange: #F7931A;
+    --soft-orange: #FFE9D5;
+    --secondary-blue: #1A9AF7;
+    --soft-blue: #E7F5FF;
+    --warm-black: #201E1C;
+    --black: #282623;
+    --grey: #BABABA;
+    --off-white: #FAF8F7;
+    --just-white: #fff;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 62.5%;
+    font-family: 'DM Sans', sans-serif;
+}
+header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-width: 320px; /*dimension mas chica en los celulares*/
+    height: 334px;
+    text-align: center;
+    background: linear-gradient(207.8deg, #201E1C 16.69%, #F7931A 100%);
+}
+/*ahora estilamos la etiqueta img*/
+header img {
+    width: 150px; /*no se por que, corre el logo a la izquierda*/
+    height: 24px;
+    margin-top: 60px;
+    align-self: center; /*asi lo arreglo, si el padre tiene display flex*/
+}
+.header--title-container {
+    width: 90%;
+    min-width: 288px;
+    max-width: 900px;
+    height: 218px;
+    margin-top: 40px;
+    /*margin: 40px 0 auto hubiera sido lo mismo, para centrarlo*/
+    text-align: center;
+    align-self: center;
+}
+.header--title-container h1 { /*se escribe asi para mas especificidad*/
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 2.6rem;/*espacio entre lineas*/
+    color: var(--just-white);
+}
+.header--title-container p {
+    margin-top: 25px;/*para que quede mas separado del h1*/
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    color:var(--soft-orange) ;
+}
+.header--title-container .header--button {
+    position: absolute;/*porque me permite mover el boton para donde yo quiera*/
+    left: calc(50% - 118px);/*aca podria haber usado 4.5rem. no explico bien lo de calc*/
+    top: 270px;
+    display: block;
+    margin-top: 35px;
+    padding: 15px;/*con esto hago que crezca, para que cuando le de estilos se vea como un boton*/
+    width: 229px;
+    height: 48px;
+    background-color: var(--off-white);
+    /* Sombra */
+    box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--black);
+}
+.header--button span {
+    display: inline-block; /*es para que se pueda ver la imagen que le vamos a poner como background*/
+    width: 13px;
+    height: 8px;
+    margin-left: 10px;
+    background-image: url('./assets/icons/vector-abajo.svg');
+}
+
+/*primero empezamos dandole estilos al main*/
+main {
+    width: 100%;
+    height: auto; /*el mismo contenido va a ir definiendo la altura de nuestro main*/
+    background-color: var(--off-white);
+}
+
+.main-exchange-container {
+    width: 100%;
+    height: auto; /*el mismo contenido va a ir definiendo la altura*/
+    padding-top: 80px;/*le queremos dejar espacio arriba y abajo para que no se tape con el boton ni interfiera con las tablas*/
+    padding-bottom: 30px;
+    text-align: center;
+}
+.main-exchange-container--title {
+    width: 90%;
+    min-width: 288px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.main-exchange-container .backgroundImg {
+    width: 200px;/*el div no existe, asi que vamos a darle dimensiones, para que ahi se vea la imagen d background*/
+    height: 200px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    background-image: url('./assets/imgs/bitcoin.svg');
+    background-size: cover; /*Escala la imagen al mayor tamaño posible sin estirarla. Si las proporciones de la imagen difieren de las del elemento, es recortada vertical u horizontalmente para que no quede un espacio vacío.*/
+
+    background-position: center;/*tenemos visibilidad del centro de la imagen siempre, sin importar el tamaño del contenedor*/
+    background-repeat: no-repeat;
+
+}
+.main-exchange-container h2 {
+    margin-bottom: 30px;/*para separar el h2 de la etiqueta parrafo*/
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 2.6rem;
+    color: var(--black);
+}
+.main-exchange-container p {
+    margin-bottom: 30px;/*separar el parrafo de lo que seria el fin de nuestro contenedor*/
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+    color: #757575;
+}
+
+.main-tables-container {
+    display: flex;
+    overflow-x: scroll;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    
+}
+
+/*<div class="main-currency-table"> es lo que vamos a empezar a estilar. Esto contiene todo lo de la tabla*/
+.main-currency-table, 
+.main-commission-table {
+    scroll-snap-align: center;
+    width: 70%;
+    min-width: 235px;
+    max-width: 500px;
+    height: 360px;
+    margin: 0 auto;
+    font-family: "Inter", sans-serif;
+}
+/*Ahora el titulo. asi como esta es mas especifico. Solo con la clase del titulo puede causar conflicto con lo que vaya a trabajar en la otra tabla*/
+.main-currency-table .currency-table--title{
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 2.3rem;
+    color: var(--bitcoin-orange);
+} /*recordar que ya se le dio estilo a todas las etiquetas p que esten dentro de .main-exchange-container. 2 clases son mas especificas que 1 clase y 1 etiqueta. Poner solo la clase de este titulo hace que los estilos no se apliquen, ya que lo que hice antes tiene mas especificidad*/
+/*ahora le damos estilos al contenedor de la tabla en si <div class="currency-table--container">*/
+.main-commission-table .commission-table--title {
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 2.3rem;
+    color: var(--secondary-blue);
+}
+.currency-table--container, 
+.commission-table--container {
+    width: 90%;
+    min-width: 230px;
+    max-width: 300px;
+    height: 250px;
+    margin: 0 auto;
+}
+/*ahora le damos estilos a la tabla en si*/
+.currency-table--container table, 
+.commission-table--container table {
+    width: 100%;/*para que la tabla en si pueda usar todo el espacio de su contenedor padre*/
+    height: 100%;
+}
+/*ahora le damos estilos a cierta informacion que pueda contener la tabla*/
+.currency-table--container td, 
+.commission-table--container td {
+    width: 50%;/*esto es para orientarnos*/
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.9rem;
+    color: var(--grey);
+    background-color: var(--just-white);
+}
+
+/*table__top-left, table__top-right, table__bottom-left, table__bottom-right*/
+.currency-table--container .table__top-left, 
+.commission-table--container .table__top-left {
+    border-radius: 15px 0 0 0; /*se hace asi porque una tabla no es un contenedor completo. si modificamos el border radius de la etiqueta tabla, no la vamos a ver, porque no es una etiqueta visual, simplemente nos ayuda como contenedor. entonces, hay que modificar cada uno de los datos de cada una de las filas que nosotros queramos. Resulta en un trabajo mas manual pero asi se hace*/
+    /*ahora hay que trabajar los otros extremos para darle bordes redondeados*/
+}
+
+.currency-table--container .table__top-right, 
+.commission-table--container .table__top-right {
+    border-radius: 0 15px 0 0;
+}
+
+.currency-table--container .table__bottom-left, 
+.commission-table--container .table__bottom-left {
+    border-radius: 0 0 0 15px;
+}
+.currency-table--container .table__bottom-right, 
+.commission-table--container .table__bottom-right {
+    border-radius: 0 0 15px 0; /*se lee: arriba-izquierda/ arriba-derecha/ abajo-derecha/ abajo-izquierda*/
+}
+
+/*ahora le damos estilos al texto que esta del lado derecho*/
+/*para eso usamos la clase table__right*/
+
+.currency-table--container .table__right, 
+.commission-table--container .table__right {
+    font-size: 1.4rem;
+    font-weight: normal;
+    line-height: 1.7rem;
+    color: #757575;
+}
+
+/*ahora le agregamos el icono*/
+
+.currency-table--container .down {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    background-image: url('./assets/icons/decremento.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.currency-table--container .up {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    background-image: url('./assets/icons/incremento.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/*aca estilamos es texto de abajo de la tabla, que dice actualizado*/
+.currency-table--date {
+    width: 190px;
+    height: 30px;
+    margin: 0 auto;
+    margin-top: 15px;
+    padding: 8px; /*para generar mas espacio interno*/
+    background-color: var(--soft-orange);
+    border-radius: 8px;
+}
+.currency-table--date p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.5rem;
+    color: var(--warm-black);
+}
+
+.commission-table--date {
+    width: 190px;
+    height: 30px;
+    margin: 0 auto;
+    margin-top: 15px;
+    padding: 8px; /*para generar mas espacio interno*/
+    background-color: var(--soft-blue);
+    border-radius: 8px;
+}
+.commission-table--date p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.5rem;
+    color: var(--warm-black);
+}
+
+
+.main-product-detail {
+    position: relative;
+    width: 100%;
+    min-width: 320px;
+    height: auto;/*porque quiero que el contenido determine la altura*/
+    padding: 20px 10px;/*para no tener que preocuparme por 
+    delimitar el crecimiento de las tarjetas y achicar su 
+    espacio, mas bien hago que el contenedor me de ese 
+    espacio interno, y las tarjetas puedan tener un 100% 
+    porque este padding va a detener su crecimiento, y el 
+    100% va a ser ese. Ademas, tambien hay un espacio abajo
+    de todo para marcar distancia con la proxima seccion,
+    asi que tambien me sirve para eso*/
+    background-color: var(--warm-black);
+}
+.product-detail--batata-logo {
+    position: absolute; /*en el contenedor principal pusimos
+    relative. Cuando colocamos algun elemento como absolute, 
+    va a buscar al
+    primer contenedor padre que tenga un position relative
+    para que se base de ahi. Si no tuvieramos el relative
+    en el main-product-detail, estaria saliendo al siguiente
+    elemento padre que tenga un relative, y ese podria ser el
+    main o otra etiqueta que no estamos buscando y tendriamos
+    un comportamiento raro.
+    Entonces, cada vez que tengamos un position absolute, hay
+    que asegurarnos de que el padre directo tenga position 
+    relative y que eso delimite su movimiento*/
+    width: 40px;
+    height: 25px;
+    top: -10px;
+    left: calc(50% - 20px);/*tambien podriamos haberlo acomodado con flex*/
+    background-image: url('./assets/icons/logo-icono.svg');
+}
+
+.product-detail--title {
+    width: 90%;
+    min-width: 288px;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+}
+.product-detail--title h2 {
+    margin-bottom: 20px;/*para separar el h2 del parrafo*/
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 2.6rem;
+    color: var(--just-white);
+}
+.product-detail--title p {
+    margin-bottom: 20px; /*para separar el parrafo de donde empieza el contenido*/
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    color: #808080;
+}
+
+.product-detail--card {
+    width: 90%;
+    min-width: 288px;
+    max-width: 400px;
+    min-height: 150px;
+    margin: 15px auto;
+    padding: 15px;
+    background-color: var(--black);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+}
+.product-detail--card .icon-card {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 10px;/*para separa el icono del texto*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.clock {
+    background-image: url('./assets/icons/reloj.svg');
+}
+.eye {
+    background-image: url('./assets/icons/ojo.svg');
+}
+.dollar {
+    background-image: url('./assets/icons/signo-dolar.svg');
+}
+.check {
+    background-image: url('./assets/icons/signo-checkeado.svg');
+}
+.product--card-title {
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 1.8rem;
+    color: var(--just-white);
+}
+.product--card-body {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    color: #808080;
+}
+
+.bitcoin-img-container {
+    width: 100%;
+    min-width: 320px;
+    height: 50vh;
+    background-image: url('./assets/imgs/bitcoinbaby2x.jpg'); 
+    /*elegimos una imagen mas grande para que, cuando la pantalla
+    se haga mas grande, la imagen pueda estirarse bien sin generar
+    pixelaje*/
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+.bitcoin-img-container h2 {
+    padding-top: 60px;
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 2.6rem;
+    color: var(--just-white);
+    /*podemos centrar el texto con un text allign center en el
+    contenedor padre*/
+}
+.main-plans-container {
+    width: 100%;
+    min-width: 320px;
+    padding-bottom: 70px;
+    text-align: center;
+}
+.plans--title {
+    width: 90%;
+    min-width: 288px;
+    height: auto;
+    margin: 0 auto;
+    /*margin-top: 50px;*/
+    margin-bottom: 50px;
+}
+.plans--title h2 {
+    padding-top: 50px;
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 2.6rem;
+    color: var(--black);
+}
+.plans--title p {
+    padding-top: 30px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    color: #757575;
+}
+/*falta generar un pequeño espacio de lo que seria el contenedor de 
+nuestros parrafos para separar el contenedor de las tarjetas*/
+/*eso lo hacemos con un margin bottom de 50px en .plans--title*/
+
+/*vamos a darle estilos primero a la primera tarjeta, no al section
+que contiene a las tarjetas*/
+
+.plans-container--slider {
+    display: flex;
+    
+    height: 316px;/*las tarjetas tienen 250. esto hace que sea mas alto que las tarjetas*/
+    overflow-x: scroll;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+}
+
+.plans-container--card {
+    position: relative;
+    /*porque hay una etiqueta p, que debe salirse del contenedor, con
+    absolute (la de la clase "recommended") que viene inmediatamente
+    abajo*/
+    scroll-snap-align: center;
+    width: 70%;
+    min-width: 190px; /*para que la tarjeta no se haga mas chica que esto*/
+    max-width: 300px;
+    /*esto es para que, cuando pase a tablet o desktop, no se haga
+    muy grande, y podamos posicionarla con media queries despues*/
+    height: 250px;
+    margin: 50px 5px 0;/*cambiamos el segundo valor de auto a 30px por el slide*/
+    /*con margin: 50px 30px 0; hay una desproporcion, porque la suma
+    entre el contenido y el margin de 60 queda un excedente. ¿como
+    nos aseguramos de que se quede en el centro? reemplazamos el 30px
+    por auto*/
+    padding: 0 15px;/*arriba y abajo/ derecha e izquierda*/
+    background-color: var(--just-white);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(89, 73, 30, 0.16);
+}
+.recommended {
+    position: absolute;
+    width: 120px;
+    height: 31px;
+    left: calc(50% - 60px);
+    top: -15px;
+    font-size: 1.2rem;
+    padding: 6px;
+    background-color: var(--bitcoin-orange);
+    border-radius: 8px;
+    color: var(--just-white);
+}
+/*nota: NO LE DIO ESTILOS AL DIV plan-info-container, capaz porque ya
+se llenara con contenido.*/
+.plan-card--title {
+    padding-top: 30px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    color: black;
+}
+.plan-card--price {
+    padding: 5px 0;
+    font-size: 5.2rem;
+    font-weight: bold;
+    line-height: 5.3rem;
+    color: black;
+}
+.plan-card--price span {
+    font-size: 1.2rem;
+    font-weight: 300;
+    position: relative;
+    top: -30px;
+    left: 5px;
+}
+.plan-card--saving {
+    font-size: 1.2rem;
+    color: #757575;
+}
+/*aca comenzamos con el boton y depsues el span*/
+.plan-card--ca {
+    width: 150px;
+    height: 48px;
+    margin-top: 20px;
+    background-color: #faf8f7;
+    border: 2px solid var(--bitcoin-orange);
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    line-height: 1.8rem;
+    color: var(--black);
+}
+.plan-card--ca span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('./assets/icons/flecha-derecha.svg');
+    vertical-align: text-bottom;
+}
+
+
+/* .plan-mensual--container {
+    width: 70%;
+    min-width: 230px;
+    max-width: 300px;
+    height: 250px;
+    margin: 50px 20px 0;
+    padding: 0 15px;
+    scroll-snap-align: center;
+    background-color: var(--just-white);
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.20);
+} */
+
+/* .plan-mensual--card {
+    /*no recibe estilos. el div no recibio estilos antes tampoco
+}*/
+
+/* .plan-mensual--title {
+    padding-top: 30px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.8rem;/*el line-height va en rem
+} */
+/* .plan-mensual--price {
+    padding: 5px 0;
+    font-size: 5.2rem;
+    font-weight: bold;
+    line-height: 5.3rem;
+    color: black;
+} */
+/* .plan-mensual--price span {
+    font-size: 1.2rem;
+    font-weight: 300;
+    position: relative;
+    top: -30px;
+    left: -5;
+} */
+/* .plan-mensual--saving {
+    font-size: 1.2rem;
+    color: #757575;
+} */
+/* .plan-mensual--ca {
+    width: 150px;
+    height: 48px;
+    margin-top: 20px;
+    background-color: #faf8f7;
+    border: 2px solid var(--bitcoin-orange);
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    line-height: 1.8rem;
+    color: var(--black);
+
+} */
+/* .plan-mensual--ca span {
+    display: inline-block;/*si no le pongo inline block no me aparece el icono
+    width: 20px;
+    height: 20px;
+    background-image: url('./assets/icons/flecha-derecha.svg');
+    background-repeat: no-repeat;
+    vertical-align: text-bottom;
+}*/
+
+footer {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    background-color: var(--bitcoin-orange);
+}
+footer section {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer .left ul {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    list-style: none;
+}
+/*poner los estilos del ul en los li hubera generado el mismo resultado*/
+.left li {
+    margin: 10px 0;
+}
+.left a {
+    text-decoration: none;
+    color: var(--just-white);
+}
+

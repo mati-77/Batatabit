@@ -1,0 +1,22 @@
+
+.main-tables-container {
+    display: flex;
+    width: 930px;
+    margin: 0 auto;
+}
+/*.main-currency-table, .main-commission-table {
+    display: inline-block;
+    width: 49%;
+}otra manera de colocar las tablas*/
+
+.product-cards--container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 930px;
+    margin: 0 auto;
+}
+.plans-container--slider {
+    justify-content: center;/*podemos, porque estamos usando flex*/
+    overflow-x: hidden;/*supuestamente, segun estudiante, para eliminar
+    el scroll lateral*/
+}
