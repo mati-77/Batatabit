@@ -1,2 +1,2 @@
 # Batatabit
-Página web responsive, maquetada con CSS Grid y Flexbox, desde un enfoque mobile first.
+Página web responsive, maquetada con HTML Y CSS, producida durante el Curso de Responsive Design: Maquetación Mobile First de Platzi
